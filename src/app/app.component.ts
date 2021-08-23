@@ -9,25 +9,10 @@ import { StoreService } from './services/store/store.service';
 })
 export class AppComponent implements OnInit {
   title = 'Flowers App';
-  categories: string[] = [];
 
   constructor(private storeService: StoreService) {}
 
   ngOnInit() {
     this.storeService.fetchFlowers();
-    this.storeService.flowers$.subscribe(
-      (flowers: Flower[]) => {
-        if (flowers) {
-          flowers.forEach(
-            (f: Flower) => {
-              if (this.categories.indexOf(f.category) < 0) {
-                this.categories.push(f.category);
-              }
-            }
-          );
-          this.categories.sort((a: string, b: string) => a.localeCompare(b));
-        }
-      }
-    )
   }
 }

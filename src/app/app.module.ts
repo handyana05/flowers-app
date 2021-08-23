@@ -15,6 +15,8 @@ import { StoreService } from './services/store/store.service';
 import { FlowerDetailsResolver } from './resolvers/flower-details.resolver';
 import { FlowersListComponent } from './pages/flowers-list/flowers-list.component';
 import { FlowerDetailsComponent } from './pages/flower-details/flower-details.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortByPipe } from './pipes/sortBy.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FlowerDetailsComponent } from './pages/flower-details/flower-details.co
     TextFilterComponent,
     FlowersListComponent,
     FlowersListItemComponent,
-    FlowerDetailsComponent
+    FlowerDetailsComponent,
+    FilterPipe,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { FlowerDetailsComponent } from './pages/flower-details/flower-details.co
     FlowersApiService,
     FiltersService,
     StoreService,
-    FlowerDetailsResolver
+    FlowerDetailsResolver,
+    FilterPipe
   ],
   bootstrap: [AppComponent]
 })

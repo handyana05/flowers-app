@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Flower } from 'src/app/models/flower';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 import { FiltersService } from 'src/app/services/filters/filters.service';
 
 @Component({
@@ -6,24 +9,39 @@ import { FiltersService } from 'src/app/services/filters/filters.service';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
 
   @Input()
-  categories!: string[];
+  flowers: Flower[] = [];
 
-  selectedCategory: string = '';
+  showedFlowers: Flower[] = [];
 
-  constructor(private filterService: FiltersService) { }
+  expanded: boolean = true;
+
+  private subscription$ = new Subscription;
+
+  constructor(private filterService: FiltersService, private filterPipe: FilterPipe) { }
 
   ngOnInit(): void {
+    this.subscription$.add(
+      this.filterService.text$.subscribe((text: string) => {
+        this.showedFlowers = this.filterPipe.transform(this.flowers, text);
+      })
+    );
   }
 
-  selectCategory(selected: string) {
-    if (this.selectedCategory.toLowerCase() === selected.toLowerCase()) {
-      this.selectedCategory = '';
-    } else {
-      this.selectedCategory = selected;
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+
+  getCategoryName(): string {
+    if (this.flowers && this.flowers.length > 0) {
+      return this.flowers[0].category;
     }
-    this.filterService.setCategoryFilter(this.selectedCategory);
+    return '';
+  }
+
+  toggleBody(): void {
+    this.expanded = !this.expanded;
   }
 }

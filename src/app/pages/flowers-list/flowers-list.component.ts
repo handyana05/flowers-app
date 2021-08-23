@@ -3,6 +3,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { Flower } from 'src/app/models/flower';
 import { FiltersService } from 'src/app/services/filters/filters.service';
 import { StoreService } from 'src/app/services/store/store.service';
+import { groupBy } from 'src/app/utilities/groupBy';
 
 @Component({
   selector: 'app-flowers-list',
@@ -10,32 +11,21 @@ import { StoreService } from 'src/app/services/store/store.service';
   styleUrls: ['./flowers-list.component.scss']
 })
 export class FlowersListComponent implements OnInit, OnDestroy {
-  flowers!: Flower[];
+  categoryFlowers: any[] = [];
 
   private subscription$ = new Subscription();
 
   constructor(private storeService: StoreService, private filterService: FiltersService) { }
 
   ngOnInit(): void {
-    let filteredFlowers$ = combineLatest([
-      this.storeService.flowers$,
-      this.filterService.category$,
-      this.filterService.text$
-    ]);
     this.subscription$.add(
-      filteredFlowers$.subscribe(
-        ([flowers, category, text]: [Flower[], string, string]) => {
-          this.flowers = flowers.filter(
-            (f: Flower) => {
-              let pass = category ? f.category === category : true;
-
-              if (text) {
-                pass = pass && f.name.toLowerCase().indexOf(text) >= 0;
-              }
-
-              return pass;
-            }
-          ).sort((a: Flower, b: Flower) => a.name.localeCompare(b.name));
+      this.storeService.flowers$.subscribe(
+        (flowers: Flower[]) => {
+          this.categoryFlowers = [];
+          const groupedByCategory = groupBy(flowers, f => f.category);
+          for (var category in groupedByCategory) {
+            this.categoryFlowers.push(groupedByCategory[category]);
+          }
         }
       )
     );

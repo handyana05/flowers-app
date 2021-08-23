@@ -1,8 +1,9 @@
-<section class="category-filter">
-  <ul class="category-filter-list">
-    <span class="filter-title">Category</span>
-    <li class="category-item" *ngFor="let category of categories" [ngClass]="{ 'active': selectedCategory === category }" (click)="selectCategory(category)" >
-      <a>{{ category }}</a>
-    </li>
-  </ul>
+<section *ngIf="showedFlowers.length > 0" class="category-flowers">
+  <div class="category-header" (click)="toggleBody()" [ngClass]="{ 'expanded': expanded }">
+    <h3 class="category-title">{{ getCategoryName() + ' (' + showedFlowers.length + ')'}}</h3>
+    <span class="mdi" [ngClass]="{ 'mdi-chevron-down': expanded, 'mdi-chevron-right': !expanded }"></span>
+  </div>
+  <div class="category-body" *ngIf="expanded">
+    <app-flowers-list-item *ngFor="let flower of showedFlowers | sortBy: 'name'; let i = index" [flower]="flower" [ngClass]="{'last': i === (showedFlowers.length - 1)}"></app-flowers-list-item>
+  </div>
 </section>
