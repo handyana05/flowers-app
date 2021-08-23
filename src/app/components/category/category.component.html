@@ -1,0 +1,8 @@
+<section class="category-filter">
+  <ul class="category-filter-list">
+    <span class="filter-title">Category</span>
+    <li class="category-item" *ngFor="let category of categories" [ngClass]="{ 'active': selectedCategory === category }" (click)="selectCategory(category)" >
+      <a>{{ category }}</a>
+    </li>
+  </ul>
+</section>

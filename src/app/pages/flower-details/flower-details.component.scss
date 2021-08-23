@@ -1,0 +1,46 @@
+@import '../../../assets/styles/variables';
+
+:host {
+  a {
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    color: $prussionblue;
+
+    &:hover {
+      color: $imperialred;
+    }
+  }
+
+  .flower-details {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: row;
+
+    box-shadow: 0 4px 12px #eaeaea;
+    border-radius: 4px;
+    height: 230px;
+
+    .flower-details-img-container {
+      flex: 0 0 auto;
+
+      img {
+        border-radius: 4px 0 0 4px;
+      }
+    }
+
+    .flower-details-info-container {
+      flex: 0 0 auto;
+      padding: .5rem 1rem;
+
+      p {
+        padding: .5rem 0;
+
+        &.price {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

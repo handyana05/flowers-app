@@ -1,0 +1,51 @@
+@import "../../../assets/styles/variables";
+
+.navbar {
+  padding: 0.7rem 1.5rem;
+  line-height: 2.2rem;
+  text-align: left;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.6rem;
+  background-color: $powderblue;
+  box-sizing: border-box;
+  border-bottom: 1px solid lighten($powderblue, 40);
+  -webkit-box-shadow: 0 2px 3px lighten($powderblue, 60);
+  -moz-box-shadow: 0 2px 3px lighten($powderblue, 60);
+  box-shadow: 0 2px 3px lighten($powderblue, 60);
+
+  @media only screen and (min-width: 331px) {
+    height: 3.6rem;
+  }
+
+  @media only screen and (max-width: 330px) {
+    height: 7.2rem;
+  }
+
+  a,
+  img {
+    display: inline-block;
+  }
+
+  a {
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .logo {
+    height: 2.2rem;
+    min-width: 2.2rem;
+    vertical-align: top;
+    padding-right: .5rem;
+  }
+
+  .site-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    position: relative;
+  }
+}

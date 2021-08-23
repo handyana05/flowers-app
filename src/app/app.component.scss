@@ -1,0 +1,35 @@
+@import "../assets/styles/variables";
+
+.page {
+  margin-top: 3.6rem;
+  padding-bottom: 2rem;
+
+  @media only screen and (min-width: 331px) {
+    margin-top: 3.6rem;
+  }
+
+  @media only screen and (max-width: 330px) {
+    margin-top: 7.2rem;
+  }
+
+  .sidebar {
+    position: fixed;
+    border-right: 1px solid change-color($color: $prussionblue, $alpha: .12);
+    font-size: 14px;
+    overflow-y: auto;
+    transition: transform .15s cubic-bezier(.4, 0, .2, 1);
+    width: 320px;
+    z-index: 5;
+    margin: 0;
+    padding: 0 0 10px 0;
+    height: calc(100vh - 60px);
+  }
+
+  .content {
+    margin-left: 340px;
+    padding: 16px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+}

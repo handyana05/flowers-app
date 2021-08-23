@@ -1,0 +1,15 @@
+<!-- <span class="mdi mdi-chevron-left"></span><span>back to <a routerLink="/admin" routerLinkActive="active">flowers list</a></span> -->
+<a routerLink="/flowers" routerLinkActive="active"><span class="mdi mdi-chevron-left"></span>back to flowers list</a>
+
+<div *ngIf="detail" class="flower-details">
+  <div class="flower-details-img-container">
+    <img src="../assets/images/flower.jpg" height="230" alt="{{name}} Image" class="flower-img"/>
+  </div>
+  <div class="flower-details-info-container">
+    <h3 class="title">{{name}}</h3>
+    <div class="info">
+      <p class="description">{{detail.description}}</p>
+      <p class="price"><i>Price: {{detail.price}} EUR</i></p>
+    </div>
+  </div>
+</div>
